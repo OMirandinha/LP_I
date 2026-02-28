@@ -1,0 +1,28 @@
+int main(){
+
+    int xadrez[8][8] = {{6,0,0,5,0,0,1,0},
+                        {0,1,0,2,0,3,0,2},
+                        {0,1,1,1,0,1,0,0},
+                        {0,0,2,0,3,4,4,3},
+                        {1,0,1,1,0,1,0,0},
+                        {0,0,1,3,0,4,0,1},
+                        {1,0,0,0,2,2,2,1},
+                        {1,5,0,6,0,1,1,0}};
+    int l,c, contagem[7] = {0, 0, 0, 0, 0, 0, 0,};
+    for (l=0;l<8;l++){
+        for (c=0;c<8;c++){
+
+            contagem[xadrez[l][c]]++;    }
+
+    }
+
+    printf("Vazios: %d\n", contagem[0]);
+    printf("Peões: %d\n", contagem[1]);
+    printf("Cavalos: %d\n", contagem[2]);
+    printf("Torres: %d\n", contagem[3]);
+    printf("Bispos: %d\n", contagem[4]);
+    printf("Reis: %d\n", contagem[5]);
+    printf("Rainhas: %d\n", contagem[6]);
+
+    return 0;
+}
