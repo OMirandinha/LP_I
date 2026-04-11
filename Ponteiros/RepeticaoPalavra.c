@@ -2,16 +2,19 @@
 #include <string.h>
 
 void ProcuraPalavra(char *frase, char *palavra) {
-    char *ptr = frase;
     int totRepeticoes = 0;
-    size_t tamPalavra = strlen(palavra);
 
-    // O strstr busca a primeira ocorrência.
-    // O loop continua enquanto ele encontrar a palavra.
-    while ((ptr = strstr(ptr, palavra)) != NULL) {
-        totRepeticoes++;
-        // Move o ponteiro para frente para não encontrar a mesma palavra no mesmo lugar
-        ptr += tamPalavra;
+    // Pega a primeira palavra da frase
+    char *token = strtok(frase, " ");
+
+    // Enquanto existirem palavras na frase
+    while (token != NULL) {
+        // Compara se a palavra atual (token) Ã© igual Ã  procurada
+        if (strcmp(token, palavra) == 0) {
+            totRepeticoes++;
+        }
+        // Pega a prÃ³xima palavra
+        token = strtok(NULL, " ");
     }
 
     if (totRepeticoes > 0) {
@@ -25,10 +28,9 @@ int main() {
     char frase[100], palavra[30];
 
     printf("Digite uma frase: ");
-    // %[^\n] faz o scanf ler a linha toda, incluindo espaços, ate o Enter
     scanf(" %[^\n]", frase);
 
-    printf("Digite a palavra a ser procurada: ");
+    printf("Digite a palavra: ");
     scanf("%s", palavra);
 
     ProcuraPalavra(frase, palavra);
