@@ -1,0 +1,97 @@
+#include <stdio.h>
+
+struct Livro
+{
+   int ano;
+   char titulo[100];
+   char autor[100];
+   int nVolume; // Número de exemplares de um dado livro.
+   float preco;
+};
+
+struct Livraria
+{
+   struct Livro V[100]; // Armazena a informação de n livros !!
+   int nLivros; // Número de livros existentes na livraria.
+};
+
+struct Livro preencheLivro()
+{
+   struct Livro l;
+
+   printf("\nANO: ");
+   scanf("%i",&l.ano);
+
+   printf("\nTITULO: ");
+   scanf(" %[^\n]",&l.titulo);
+
+   printf("\nAUTOR: ");
+   scanf(" %[^\n]",&l.autor);
+
+   printf("\nQUANTIDADE DE VOLUMES: ");
+   scanf("%i",&l.nVolume);
+
+   printf("\nVALOR: ");
+   scanf("%f",&l.preco);
+
+   return l;
+}
+
+void preencheLivraria(struct Livraria *liv, int numLivros)
+{
+
+   int i;
+
+   liv->nLivros = numLivros;
+
+   for (i=0;i<numLivros;i++)
+   {
+      printf("\nPREENCHA O LIVRO %i",i+1);
+      liv->V[i]=preencheLivro();
+   }
+
+}
+
+void mostraLivros(struct Livraria *liv, int numLivros){
+    int i;
+
+    for(i=0;i<numLivros;i++)
+    {
+        printf("\nLIVRO NUMERO %i",i+1);
+        printf("\nTITULO: %s",liv->V[i].titulo);
+        printf("\nAUTOR: %s",liv->V[i].autor);
+        printf("\nVOLUMES: %i",liv->V[i].nVolume);
+        printf("\nPRECO: %.2f",liv->V[i].preco);
+        printf("\n");
+    }
+
+}
+
+void custoLivros(struct Livraria *liv, int numLivros){
+
+    int i;
+    float soma;
+    for(i=0;i<numLivros;i++)
+    {
+        soma=soma+(liv->V[i].preco*liv->V[i].nVolume);
+    }
+
+    printf("\nO CUSTO DOS LIVROS EH DE: %.2f",soma);
+}
+
+int main()
+{
+   int qtlivros;
+   struct Livraria livraria;
+
+   printf("Informe a quantidade de livros: ");
+   scanf("%i",&qtlivros);
+
+   preencheLivraria(&livraria, qtlivros);
+   mostraLivros(&livraria, qtlivros);
+   custoLivros(&livraria, qtlivros);
+
+
+   return 0;
+
+}
